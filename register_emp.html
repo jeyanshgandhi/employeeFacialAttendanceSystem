@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Employee Registration</title>
+    <style>
+        /* Your CSS remains the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to right, #dfe9f3, #ffffff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1400px;
+            height: 85vh;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .left {
+            background: linear-gradient(to top right, #c2e9fb, #a1c4fd);
+            width: 40%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-upload {
+            position: relative;
+            width: 100%;
+            height: 45px;
+            background-color: #6a11cb;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 45px;
+            overflow: hidden;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .file-upload:hover {
+            background-color: #a1c4fd;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-name {
+            margin-top: 5px;
+            color: #555;
+            font-size: 14px;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        video {
+            width: 95%;
+            height: 300px;
+            border-radius: 15px;
+            margin-top: 25px;
+            background: #333;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .right {
+            width: 60%;
+            padding: 40px 50px;
+            background: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .right h2 {
+            margin-bottom: 25px;
+            color: #333;
+            font-size: 32px;
+            text-align: center;
+        }
+
+        .form-container {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .form-group {
+            flex: 1 1 48%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .form-group input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            background: #fff;
+            transition: 0.3s;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .form-group input:focus {
+            border-color: #6a11cb;
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(106, 17, 203, 0.3);
+        }
+
+        .form-group.full-width {
+            flex: 1 1 100%;
+        }
+
+        .register-btn {
+            margin-top: 25px;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.4s;
+            box-shadow: 0px 4px 15px rgba(106, 17, 203, 0.4);
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 6px 20px rgba(106, 17, 203, 0.5);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="left">
+        <h3>Face Capture</h3>
+        <video id="camera" autoplay playsinline></video>
+        <button id="capture-btn" class="register-btn">Capture Face</button>
+        <div id="status"></div>
+        <div id="file-name" class="file-name"></div>
+    </div>
+
+    <div class="right">
+        <h2>Employee Registration</h2>
+        <form id="registration-form" class="form-container" action="/register_emp" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="employee_name">Employee Name</label>
+                <input type="text" id="employee_name" name="employee_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="employee_id">Employee ID</label>
+                <input type="text" id="employee_id" name="employee_id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email (prefix only):</label>
+                <input type="text" id="email" name="email" required>
+                <small>Will be appended with @company.in</small>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="position">Position</label>
+                <input type="text" id="position" name="position" required>
+            </div>
+
+            <div class="form-group">
+                <label for="department">Department</label>
+                <input type="text" id="department" name="department" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="doj">Date of Joining</label>
+                <input type="date" id="doj" name="doj" required>
+            </div>
+
+            <div class="form-group">
+                <label for="resume">Upload Resume</label>
+                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+            </div>
+
+            <div class="form-group">
+                <label for="offer_letter">Upload Offer Letter</label>
+                <input type="file" id="offer_letter" name="offer_letter" accept=".pdf,.doc,.docx" required>
+            </div>
+
+            <div class="form-group">
+                <label for="bond_document">Upload Bond Document (Optional)</label>
+                <input type="file" id="bond_document" name="bond_document" accept=".pdf,.doc,.docx">
+            </div>
+
+            <input type="file" id="captured-image" name="captured_image" style="display:none" required />
+
+            <button type="submit" id="register-btn" class="register-btn">Register Employee</button>
+        </form>
+        <div id="error-message" style="display:none; color: red; margin-top: 10px;">Registration failed. Please try again.</div>
+    </div>
+</div>
+
+<script>
+    // Get the camera element and capture button
+    const video = document.getElementById("camera");
+    const captureBtn = document.getElementById("capture-btn");
+    const statusDiv = document.getElementById("status");
+
+    // Initialize the camera
+    async function initCamera() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+        } catch (error) {
+            statusDiv.innerHTML = "Error: Unable to access the camera.";
+        }
+    }
+
+    // Capture the image from the camera and convert it to base64
+    captureBtn.addEventListener("click", async function() {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Convert canvas to base64 image
+        const base64Image = canvas.toDataURL("image/jpeg");
+        statusDiv.innerHTML = "Image Captured Successfully";
+
+        // Store the captured image in the hidden file input
+        const capturedImageInput = document.getElementById("captured-image");
+        const dataUrlToBlob = (dataUrl) => {
+            const arr = dataUrl.split(',');
+            const mime = arr[0].match(/:(.*?);/)[1];
+            const bstr = atob(arr[1]);
+            let n = bstr.length;
+            const u8arr = new Uint8Array(n);
+            while(n--) u8arr[n] = bstr.charCodeAt(n);
+            return new Blob([u8arr], {type: mime});
+        };
+
+        const blob = dataUrlToBlob(base64Image);
+        const file = new File([blob], "captured_image.jpg", { type: "image/jpeg" });
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        capturedImageInput.files = dataTransfer.files;
+    });
+
+    // Form submission handling
+    document.getElementById("registration-form").addEventListener("submit", async function(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        const formData = new FormData(this);
+
+        try {
+            // Send form data to the server using fetch
+            const response = await fetch("/register_emp", { // Corrected URL
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json(); // Parse the JSON response
+
+            if (response.ok && data.success) {
+                // Redirect to the main page on successful registration
+                window.location.href = "/"; // Change to your actual main page URL
+            } else {
+                // Show error message on failure
+                const errorMessageDiv = document.getElementById("error-message");
+                errorMessageDiv.textContent = data.message || "Registration failed. Please try again.";
+                errorMessageDiv.style.display = "block";
+            }
+        } catch (error) {
+            // Handle any unexpected errors
+            console.error("Error:", error);
+            const errorMessageDiv = document.getElementById("error-message");
+            errorMessageDiv.textContent = "An unexpected error occurred.";
+            errorMessageDiv.style.display = "block";
+        }
+    });
+
+    // Initialize the camera when the page loads
+    window.onload = initCamera;
+
+    // Optional: Implement your client-side validation function if needed
+    function validateForm() {
+        // Add your validation logic here.
+        // For example, check if all required fields are filled.
+        return true; // Return true to allow submission, false to prevent
+    }
+</script>
+
+</body>
+</html>

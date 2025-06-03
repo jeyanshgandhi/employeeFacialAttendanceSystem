@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ongoing Projects</title>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    .project-card {
+      background: #fff;
+      padding: 20px 30px;
+      margin: 20px 0;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      animation: slideUp 0.8s ease forwards;
+      opacity: 0;
+    }
+
+    /* Animation */
+    @keyframes slideUp {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Delay each project a bit for a smooth cascade */
+    .project-card:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .project-card:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .project-card:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    .project-card h3 {
+      margin-top: 0;
+      color: #0077b6;
+    }
+
+    .project-card p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Ongoing Projects</h1>
+
+    <div class="project-card">
+      <h3>Smart AI Attendance System</h3>
+      <p><strong>Company:</strong> Tech Innovations Pvt. Ltd.</p>
+      <p><strong>Start Date:</strong> March 2025</p>
+      <p><strong>Estimated Completion:</strong> December 2025</p>
+      <p><strong>Budget:</strong> ₹25,00,000</p>
+    </div>
+
+    <div class="project-card">
+      <h3>Real-Time Traffic Monitoring</h3>
+      <p><strong>Company:</strong> Urban Tech Solutions</p>
+      <p><strong>Start Date:</strong> April 2025</p>
+      <p><strong>Estimated Completion:</strong> January 2026</p>
+      <p><strong>Budget:</strong> ₹18,00,000</p>
+    </div>
+
+    <div class="project-card">
+      <h3>E-commerce Recommendation Engine</h3>
+      <p><strong>Company:</strong> Online Retailers Ltd.</p>
+      <p><strong>Start Date:</strong> May 2025</p>
+      <p><strong>Estimated Completion:</strong> March 2026</p>
+      <p><strong>Budget:</strong> ₹30,00,000</p>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add Project Details</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(to right, #dfe9f3, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      animation: slideDown 1s ease;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group-inline {
+      display: flex;
+      gap: 20px;
+    }
+
+    .form-group-inline .form-group {
+      flex: 1;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: #4CAF50;
+    }
+
+    button {
+      background: #4CAF50;
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    @keyframes slideDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-100px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Add New Project</h2>
+  <form action="/submit_project" method="POST">
+    
+    <div class="form-group">
+      <label for="projectName">Project Name</label>
+      <input type="text" id="projectName" name="project_name" placeholder="Enter project name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="companyName">Company Name</label>
+      <input type="text" id="companyName" name="company_name" placeholder="Enter company name" required>
+    </div>
+
+    <div class="form-group-inline">
+      <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <input type="date" id="startDate" name="start_date" required>
+      </div>
+
+      <div class="form-group">
+        <label for="endDate">End Date</label>
+        <input type="date" id="endDate" name="end_date">
+      </div>
+    </div>
+
+    <div class="form-group-inline">
+      <div class="form-group">
+        <label for="budget">Budget (₹)</label>
+        <input type="number" id="budget" name="budget" placeholder="Enter budget" required>
+      </div>
+
+      <div class="form-group">
+        <label for="projectType">Project Type</label>
+        <select id="projectType" name="project_type" required>
+          <option value="">Select type</option>
+          <option value="Software Development">Software Development</option>
+          <option value="AI/ML Project">AI/ML Project</option>
+          <option value="Web Application">Web Application</option>
+          <option value="Mobile App">Mobile App</option>
+          <option value="Research">Research</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Project Description</label>
+      <textarea id="description" name="description" rows="4" placeholder="Enter project details..." required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Status</label>
+      <div class="status">
+        <input type="checkbox" id="status" name="status">
+        <label for="status" style="font-weight: normal;">Mark as Completed</label>
+      </div>
+    </div>
+
+    <button type="submit">Save Project</button>
+
+  </form>
+</div>
+
+</body>
+</html>
