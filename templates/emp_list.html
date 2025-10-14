@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar with Employee Profiles</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/emp_list.css') }}" />
+</head>
+<body>
+
+<!-- Button to open sidebar -->
+<button class="toggle-btn" onclick="toggleSidebar()">☰ Open Sidebar</button>
+
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+  <h2>Employees List</h2>
+  
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Search employees..." />
+    <button class="search-btn">🔍</button>
+  </div>
+
+  <!-- Employee Profile Cards -->
+  <div class="employee-card">
+    <img src="{{ url_for('uploaded_file', filename=emp.captured_image_path.split('/')[-1]) }}" alt="{{ emp.employee_name }}'s profile">
+    <div class="employee-details">
+      <div class="employee-name">John Doe</div>
+      <div class="employee-role">Software Engineer</div>
+    </div>
+  </div>
+
+  <div class="employee-card">
+    <img class="employee-photo" src="https://via.placeholder.com/50" alt="Profile Photo">
+    <div class="employee-details">
+      <div class="employee-name">Jane Smith</div>
+      <div class="employee-role">Product Manager</div>
+    </div>
+  </div>
+
+  <!-- You can add more employee cards here dynamically -->
+
+</div>
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("active");
+  }
+</script>
+
+</body>
+</html>

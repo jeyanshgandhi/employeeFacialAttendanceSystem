@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add Project Details</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/add_project.css') }}" />
+
+</head>
+<body>
+
+<div class="container">
+  <h2>Add New Project</h2>
+  <form action="/submit_project" method="POST">
+    
+    <div class="form-group">
+      <label for="projectName">Project Name</label>
+      <input type="text" id="projectName" name="project_name" placeholder="Enter project name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="companyName">Company Name</label>
+      <input type="text" id="companyName" name="company_name" placeholder="Enter company name" required>
+    </div>
+
+    <div class="form-group-inline">
+      <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <input type="date" id="startDate" name="start_date" required>
+      </div>
+
+      <div class="form-group">
+        <label for="endDate">End Date</label>
+        <input type="date" id="endDate" name="end_date">
+      </div>
+    </div>
+
+    <div class="form-group-inline">
+      <div class="form-group">
+        <label for="budget">Budget (₹)</label>
+        <input type="number" id="budget" name="budget" placeholder="Enter budget" required>
+      </div>
+
+      <div class="form-group">
+        <label for="projectType">Project Type</label>
+        <select id="projectType" name="project_type" required>
+          <option value="">Select type</option>
+          <option value="Software Development">Software Development</option>
+          <option value="AI/ML Project">AI/ML Project</option>
+          <option value="Web Application">Web Application</option>
+          <option value="Mobile App">Mobile App</option>
+          <option value="Research">Research</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Project Description</label>
+      <textarea id="description" name="description" rows="4" placeholder="Enter project details..." required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Status</label>
+      <div class="status">
+        <input type="checkbox" id="status" name="status">
+        <label for="status" style="font-weight: normal;">Mark as Completed</label>
+      </div>
+    </div>
+
+    <button type="submit">Save Project</button>
+
+  </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login_recognition.css') }}" />
+</head>
+<body>
+
+<div class="container">
+    <h2>Admin Login</h2>
+    <div class="video-container">
+        <!-- Video element to display webcam feed -->
+        <video id="videoFeed" autoplay></video>
+        <div class="message">Please look at the camera</div>
+    </div>
+
+    <button id="captureButton" onclick="captureFace()" >Capture Face</button>
+</div>
+
+<script>
+    // Access the webcam and display the feed in the video element
+    const video = document.getElementById('videoFeed');
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+            video.srcObject = stream;
+        })
+        .catch(function(err) {
+            console.log("Error accessing webcam: " + err);
+        });
+
+        function captureFace() {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+        
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+        
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+            const imageData = canvas.toDataURL('image/jpeg');
+        
+            fetch('/login_recognition', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ image: imageData })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/';  // 👈 Now, manually go to home page
+                } else {
+                    alert(data.message || "Face not recognized. Access Denied!");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+        
+</script>
+
+</body>
+</html>
