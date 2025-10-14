@@ -1,0 +1,56 @@
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -35%;
+    width: 35%;
+    height: 100%;
+    background-color: #111;
+    color: white;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    padding-top: 60px;
+}
+
+.sidebar h2 {
+    margin-left: 30px;
+    font-size: 24px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin-left: 30px;
+}
+
+.sidebar ul li {
+    padding: 10px 0;
+    font-size: 20px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #444;
+}
+
+/* Show Sidebar */
+.sidebar.show {
+    left: 0;
+}
+
+/* Close Button in Sidebar */
+.sidebar .close-btn {
+    color: white;
+    font-size: 36px;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}

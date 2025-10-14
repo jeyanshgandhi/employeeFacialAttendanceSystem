@@ -1,0 +1,63 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.project-card {
+    background: #fff;
+    padding: 20px 30px;
+    margin: 20px 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+/* Animation */
+@keyframes slideUp {
+    0% {
+    transform: translateY(100px);
+    opacity: 0;
+    }
+    100% {
+    transform: translateY(0);
+    opacity: 1;
+    }
+}
+
+/* Delay each project a bit for a smooth cascade */
+.project-card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.project-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.project-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.project-card h3 {
+    margin-top: 0;
+    color: #0077b6;
+}
+
+.project-card p {
+    margin: 5px 0;
+    color: #555;
+}
