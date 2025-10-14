@@ -1,0 +1,1 @@
+This project is mainly based on face detection and recognition which helps to solve realtime issues in fields of restaurants, schools, companies and many-more. This wil help you get your attendance done without any needs of standing in queue for punching.
